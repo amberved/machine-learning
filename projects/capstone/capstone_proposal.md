@@ -9,7 +9,7 @@ May 1st, 2017
 
 ### Domain Background
 
-Big and high profile credit cards and data breaches have been dominating the headlines in the past couple of years across the world. These problem of Credit cards breaches in U.S. alone is responsible for 47 percent of the world’s card fraud as of 2014. 15.4 million US consumers were affected by these kind of fraud in 2016, which is nearly 2 million more than in 2015. In dollar amount associated with such activities is 16 Billion in 2016 alone with ever Significantly increasing Card-Not-Present Fraud by 61 Percent. Hence it is a big clear and present problem that needs Smarter soultions and machine learning can help.
+Big and high profile credit cards and data breaches have been dominating the headlines in the past couple of years across the world. These problem of Credit cards breaches in U.S. alone is responsible for 47 percent of the world’s card fraud as of 2014. 15.4 million US consumers were affected by these kind of fraud in 2016, which is nearly 2 million more than in 2015. Dollar amount associated with such activities is 16 Billion in 2016 alone and significantly increasing at the rate of 61 Percent. Hence it is a big clear and present problem that needs Smarter soultions and machine learning can help.
 
 ![Figure 1](http://github.com/amberved/machine-learning/blob/master/projects/capstone/CreditcardFraudGraph.png)
 
@@ -31,7 +31,7 @@ ii) How to deal with unbalanced and evolving data streams (non-stationarity
 due to fraud evolution and change of spending behavior)
 iii) How to assess performances in a way which is relevant for detection and iv) How to use feedbacks provided by investigators on the fraud alerts generated.
 
-Credit Card Fraud can in theory to detected based on various features like time of use, place of use, frequncy, unsual amount of spending, frequency of transection and many more such featues. But in general all this can be converted to methomatical values and machine learning models can be applied. In generic terms Credit Card Fraud identification can be treated as classicifcation problem.
+Credit Card Fraud can in theory to detected based on various features like time of use, place of use, frequncy, unsual amount of spending, frequency of transection and many more such featues. But in general all this can be converted to mathematical values and machine learning models can be applied. In generic terms Credit Card Fraud identification can be treated as classicifcation problem.
 
 ### Datasets and Inputs
 
@@ -46,12 +46,8 @@ Essentially this is a method that will process the data to have an approximate 5
 
 ### Solution Statement
 
-In this section, clearly describe a solution to the problem. The solution should be applicable to the project domain and appropriate for the dataset(s) or input(s) given. Additionally, describe the solution thoroughly such that it is clear that the solution is quantifiable (the solution can be expressed in mathematical or logical terms) , measurable (the solution can be measured by some metric and clearly observed), and replicable (the solution can be reproduced and occurs more than once).
+This problem of identifying frudulant transection from valid credit card, can we taken as a classical ML Classfication problem. Simply put classification problems are tasked of identifying to which of a set of categories a new observation may belongs, on the basis of a training set of data containing observations whose category membership is known.
 
-### Benchmark Model
-
-This problem of identifying frudulant transection from valid credit card, can we taken as a classical ML Cluster and/or  Classfication problem.
- 
 Cluster in general is a group of objects that belongs to the same class. In other words, similar objects are grouped in one cluster and dissimilar objects are grouped in another cluster. Since this problem have 4 possible conditions for any transection
 Identified as Fraud and is flagged as Fraud
 Identified as Fraud and is *NOT* flagged as Fraud
@@ -59,23 +55,37 @@ Identified as *NOT*  Fraud and is flagged as Fraud
 Identified as *NOT*  Fraud and is *NOT* as Fraud
 Hence can try to use confusion matrix to review outcome of the ML models.
 
-I will prefer to use various clustering algorithm like K-means clustering algorithm, Gaussian Mixture Model clustering algorithm & along with other classficition models like decisionTree or Randomforest.  
+I will prefer to use various clustering algorithm like K-means clustering algorithm, Gaussian Mixture Model clustering algorithm & along with other classficition models like decisionTree or Randomforest.
 
+### Benchmark Model
+For Benchmark this problem, I will be using better results from either default out-of-box scikit implemenaton of Support Vector Machines (SVM) or Naive Bayes(NB) classifier algorithm.
 
 ### Evaluation Metrics
 
-As outlined I think confusion matrix could be a good way to evalute various models and algorithum effectiveness. Specially one can focus on having mild bias towards over reporting on -ve side (detecting transections as fraud in place of more relax where fraud transection are under reported). This could be better overall strategy as unreported fraud transection can result into financial loss. We dont have to different data sets for developing and benchmarking hence we will use random cross validation to compare various models. I will also like to benchmark our outcome against various other implementation avaliable on Kaggle.
+Classifier performance depends greatly on the characteristics of the data to be classified. There is no single classifier that works best on all given problems. The data set we are using for this problem is highly imbalanced and hence traditional popular measures like "precision and recall" and "receiver operating characteristic (ROC)" may not be very effective for this classification algorithms. 
 
-Last but not the least, I will share the details of my model on Kaggel for other to review and share insight. 
-
+As a performance metric, I think the uncertainty coefficient will have a advantage over simple accuracy in that it is not affected by the relative sizes of the different classes. 
 
 ### Project Design
 I intentd to follow the strategy to approach this problem:
 
 A) Explore the dataset - Understand the data by finding basic relationships in data between various features and target variable. 
-B) Do necessary data preprocessing like feature reduction etc and use cross-validation to train several different ML algorithms (K-means clustering algorithm, Gaussian Mixture Model & others). Get a baseline score and confusion matrix.
-C) Tune each model and validate noticable score improvements for each of them. 
-D) Train an ensemble using the stacking technique with previous models as base predictors. To get the final score. 
+B) Do necessary data preprocessing like feature reduction etc and 
+C) Use cross-validation to train several different ML algorithms. Get a baseline score and confusion matrix. We plan to use the following ML 
+   1) K-means clustering algorithm, 
+   2) Gaussian Mixture Model 
+   3) Random random forest
+   4) Naive Bayes classifier
+   5) Logistic regression
+   
+D) Tune each model and validate noticable score improvements for each of them.
+
+E) Train an ensemble using the stacking technique with previous models as base predictors. To get the final score. Model ensembling is a very powerful technique to increase accuracy on a variety of ML tasks as averaging multiple
+models often reduces the variance of single models. 
+
+As outlined confusion matrix could be a good way to evalute various models and algorithum effectiveness. Specially one can focus on having mild bias towards over reporting on -ve side (detecting transections as fraud in place of more relax where fraud transection are under reported). This could be better overall strategy as unreported fraud transection can result into financial loss. We dont have to different data sets for developing and benchmarking hence we will use random cross validation to compare various models. I will also like to benchmark our outcome against various other implementation avaliable on Kaggle.
+
+Last but not the least, I will share the details of my model on Kaggel for other to review and share insight. 
 
 -----------
 
@@ -87,5 +97,4 @@ http://blog.kaggle.com/2016/07/21/approaching-almost-any-machine-learning-proble
 https://en.wikipedia.org/wiki/K-means_clustering
 https://en.wikipedia.org/wiki/Mixture_model
 http://www.cs.cmu.edu/~guestrin/Class/10701-S07/Slides/clustering.pdf
-
-
+http://www.ulb.ac.be/di/map/adalpozz/pdf/Dalpozzolo2015PhD.pdf
