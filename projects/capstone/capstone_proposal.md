@@ -3,7 +3,7 @@
 By - 
 Amber Ved 
 www.github.com/amberved
-May 1st, 2017
+May 8th, 2017
 
 ## Proposal
 
@@ -48,14 +48,10 @@ Essentially this is a method that will process the data to have an approximate 5
 
 This problem of identifying frudulant transection from valid credit card, can we taken as a classical ML Classfication problem. Simply put classification problems are tasked of identifying to which of a set of categories a new observation may belongs, on the basis of a training set of data containing observations whose category membership is known.
 
-Cluster in general is a group of objects that belongs to the same class. In other words, similar objects are grouped in one cluster and dissimilar objects are grouped in another cluster. Since this problem have 4 possible conditions for any transection
-Identified as Fraud and is flagged as Fraud
-Identified as Fraud and is *NOT* flagged as Fraud
-Identified as *NOT*  Fraud and is flagged as Fraud
-Identified as *NOT*  Fraud and is *NOT* as Fraud
-Hence can try to use confusion matrix to review outcome of the ML models.
-
-I will prefer to use various clustering algorithm like K-means clustering algorithm, Gaussian Mixture Model clustering algorithm & along with other classficition models like decisionTree or Randomforest.
+This problem of identifying the fraulent transections can be broken into 3 steps. 
+1) Imbalanced in data - The ratio of valid vs fraud transection data avaliable to us. 
+2) Classifiction - I will use decisionTree, Randomforest, Naive Bayes classifier, Support vector machines  & Quadratic classifiers algorithums. 
+3) Create a ensamble - The goal of ensemble will be to combine the predictions of several base models to built and improve generalizability / robustness over a single estimator. We will use both boosting ensemble methods to compare the with base estimators to reduce the bias of the combined estimator. The motivation is to combine several weak models to produce a powerful ensemble. I will test AdaBoost Classification, Gradient Tree Boosting Classification.
 
 ### Benchmark Model
 For Benchmark this problem, I will be using better results from either default out-of-box scikit implemenaton of Support Vector Machines (SVM) or Naive Bayes(NB) classifier algorithm.
@@ -64,7 +60,18 @@ For Benchmark this problem, I will be using better results from either default o
 
 Classifier performance depends greatly on the characteristics of the data to be classified. There is no single classifier that works best on all given problems. The data set we are using for this problem is highly imbalanced and hence traditional popular measures like "precision and recall" and "receiver operating characteristic (ROC)" may not be very effective for this classification algorithms. 
 
-As a performance metric, I think the uncertainty coefficient will have a advantage over simple accuracy in that it is not affected by the relative sizes of the different classes. 
+As a performance metric, I think the uncertainty coefficient will have a advantage over simple accuracy in that it is not affected by the relative sizes of the different classes. The uncertainty coefficient is useful for measuring the validity of a statistical classification algorithm and has the advantage over simpler accuracy measures in that it is not affected by the relative fractions of the different classes, i.e., P(x). It also has the unique property that it won't penalize an algorithm for predicting the wrong classes, so long as it does so consistently (i.e., it simply rearranges the classes). This is useful in evaluating clustering algorithms since cluster labels typically have no particular ordering.
+
+Suppose we have samples of two discrete random variables, X and Y. By constructing the joint distribution, PX,Y(x, y), from which we can calculate the conditional distributions, PX|Y(x|y) = PX,Y(x, y)/PY(y).
+
+The uncertainty coefficient or proficiency is defined as:
+U(X|Y)={{H(X)-H(X|Y)}{H(X)}}={{I(X;Y)}{H(X)}},
+
+Where
+The entropy of a single distribution is given as:
+{H(X)=-\sum _{x}P_{X}(x)\log P_{X}(x),} H(X)=-\sum _{x}P_{X}(x)\log P_{X}(x),
+while the conditional entropy is given as:
+{H(X|Y)=-\sum _{x,~y}P_{X,Y}(x,~y)\log P_{X|Y}(x|y).} H(X|Y)=-\sum _{{x,~y}}P_{{X,Y}}(x,~y)\log P_{{X|Y}}(x|y).
 
 ### Project Design
 I intentd to follow the strategy to approach this problem:
@@ -80,9 +87,7 @@ C) Use cross-validation to train several different ML algorithms. Get a baseline
    
 D) Tune each model and validate noticable score improvements for each of them.
 
-E) Train an ensemble using the stacking technique with previous models as base predictors. To get the final score. Model ensembling is a very powerful technique to increase accuracy on a variety of ML tasks as averaging multiple
-models often reduces the variance of single models. 
-
+E) Train an ensemble using the stacking technique with previous models as base predictors. To get the final score. Model ensembling is a very powerful technique to increase accuracy on a variety of ML tasks as averaging multiple models often reduces the variance of single models. 
 As outlined confusion matrix could be a good way to evalute various models and algorithum effectiveness. Specially one can focus on having mild bias towards over reporting on -ve side (detecting transections as fraud in place of more relax where fraud transection are under reported). This could be better overall strategy as unreported fraud transection can result into financial loss. We dont have to different data sets for developing and benchmarking hence we will use random cross validation to compare various models. I will also like to benchmark our outcome against various other implementation avaliable on Kaggle.
 
 Last but not the least, I will share the details of my model on Kaggel for other to review and share insight. 
@@ -97,4 +102,5 @@ http://blog.kaggle.com/2016/07/21/approaching-almost-any-machine-learning-proble
 https://en.wikipedia.org/wiki/K-means_clustering
 https://en.wikipedia.org/wiki/Mixture_model
 http://www.cs.cmu.edu/~guestrin/Class/10701-S07/Slides/clustering.pdf
+http://www.ele.uri.edu/faculty/he/PDFfiles/ImbalancedLearning.pdf
 http://www.ulb.ac.be/di/map/adalpozz/pdf/Dalpozzolo2015PhD.pdf
